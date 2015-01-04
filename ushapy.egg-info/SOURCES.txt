@@ -1,0 +1,7 @@
+setup.py
+ushapy/__init__.py
+ushapy.egg-info/PKG-INFO
+ushapy.egg-info/SOURCES.txt
+ushapy.egg-info/dependency_links.txt
+ushapy.egg-info/not-zip-safe
+ushapy.egg-info/top_level.txt
