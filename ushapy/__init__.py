@@ -1,1 +1,1 @@
-import .ushahidiv2
+import ushahidiv2
