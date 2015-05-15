@@ -236,3 +236,100 @@ def add_report_to_platform(mapurl, title, description, lat, lon, location, categ
 
 	return(r)
 
+
+def add_message_to_platform(mapurl, message_text, message_date_in, message_type, 
+	service_messageid, message_level, reporter_id, message_from, message_to, message_detail, 
+	parent_id, incident_id, latitude, longitude, 
+	username, password, newmessage=True):
+	
+	#Make sure there's a timestamp on this message
+	if message_date_in == '':
+		now = time.gmtime();
+		message_date = time.strftime("%Y-%m-%d %H:%M:%S", now);
+	else:
+		message_date = message_date_in;
+
+	payload = { \
+	'task': 'messages', \
+	'action': 'add', \
+	'message_text': message_text, \
+	'message_date': message_date, \
+	'message_type': message_type, \
+	'service_messageid': service_messageid, \
+	'message_level': message_level, \
+	'reporter_id': reporter_id, \
+	'message_from': message_from, \
+	'message_to': message_to, \
+	'message_detail': message_detail, \
+	'parent_id': parent_id, \
+	'incident_id': incident_id, \
+	'latitude': latitude, \
+	'longitude': longitude \
+	};
+
+	r = requests.post(mapurl+"api", data=payload, auth=(username, password));
+
+	return(r)
+
+
+def add_reporter_to_platform(mapurl, service_id, service_account, level_id, reporter_first, reporter_last,
+	reporter_email, reporter_phone, reporter_ip, reporter_date, location_name, latitude, longitude, 
+	username, password, newservice=True):
+	
+	payload = { \
+	'task': 'reporters', \
+	'action': 'add', \
+	'service_id': service_id, \
+	'service_account': service_account, \
+	'level_id': level_id, \
+	'reporter_first': reporter_first, \
+	'reporter_last': reporter_last, \
+	'reporter_email': reporter_email, \
+	'reporter_phone': reporter_phone, \
+	'reporter_ip': reporter_ip, \
+	'reporter_date': reporter_date, \
+	'location_id': '', \
+	'location_name': location_name, \
+	'latitude': latitude, \
+	'longitude': longitude \
+	};
+	
+	r = requests.post(mapurl+"api", data=payload, auth=(username, password));
+	
+	return(r)
+
+
+def add_service_to_platform(mapurl, service_name, service_description, service_url, service_api,
+	username, password, newservice=True):
+	
+	payload = { \
+	'task': 'services', \
+	'action': 'add', \
+	'service_name': service_name, \
+	'service_description': service_description, \
+	'service_url': service_url, \
+	'service_api': service_api \
+	};
+
+	r = requests.post(mapurl+"api", data=payload, auth=(username, password));
+
+	return(r)
+
+
+def edit_service(mapurl, service_id, service_name, service_description, service_url, service_api,
+	username, password, newservice=True):
+	
+	payload = { \
+	'task': 'services', \
+	'action': 'edit', \
+	'service_id': service_id, \
+	'service_name': service_name, \
+	'service_description': service_description, \
+	'service_url': service_url, \
+	'service_api': service_api \
+	};
+	
+	r = requests.post(mapurl+"api", data=payload, auth=(username, password));
+	
+	return(r)
+
